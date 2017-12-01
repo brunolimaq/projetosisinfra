@@ -1,0 +1,149 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  
+  <groupId>sisinfra</groupId>
+  <artifactId>sisinfra</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  
+   <packaging>war</packaging>
+   <name>sisinfra</name>
+   <description>Sistema de Infraestrutura</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- relacionado a encodificação do projeto -->
+		
+				
+		<!-- Commons Lang (utilidades) -->
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<!-- OmniFaces  -->		
+		<omnifaces.version>2.1</omnifaces.version>
+		<!-- Weld - Implementação do CDI -->
+		<weld.version>2.2.10.Final</weld.version>
+		<!-- Weld depende do Jandex -->
+		<jandex.version>1.2.3.Final</jandex.version>
+		<!-- Spring Security -->
+		<spring-security.version>4.1.1.RELEASE</spring-security.version>	
+		
+	</properties>
+	
+	
+	<dependencies>
+	
+		<dependency> <!-- ele colocou essa dependência quando estava configurando o CDI. O CDI é uma especificação e o weld a implementação dela ????????? -->
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>2.4.0.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		     <!-- Weld (implementação do CDI) -->
+
+		
+		<!-- as próximas três dependências são p/ poder usar o JSF -->
+		<dependency> <!-- contém tanto a especificação(pacote javax.faces) quanto a implementação, Morrara no caso -->
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>2.2.14</version>
+			<scope>compile</scope> <!-- escopo padrão -->
+		</dependency>
+	
+	
+		<dependency> 
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency> <!-- dependência da api de servlet -->
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope> <!-- vai dizer ao Maven q ele precisa colocar essa dependência no path p/ compilar, mas Ñ precisa colocar no pacote -->
+		</dependency>
+		
+		<dependency> <!-- dependência do Hibernate, referente à API de "validação" -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.3.2.Final</version>
+			<scope>compile</scope> 
+		</dependency>
+		
+		<dependency> <!-- outra dependência do Hibernate, referente à "persistência de dados" -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.4.Final</version>
+			<scope>compile</scope> 
+		</dependency>
+		
+		<dependency> <!-- dependência do drive do MySQL -->
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.5</version>
+			<scope>compile</scope> 
+		</dependency>
+		
+		<!-- Log4J -->    	
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+		  <groupId>commons-logging</groupId>
+		  <artifactId>commons-logging</artifactId>
+		  <version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+			<!-- Spring Security (autenticação e autorização) -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.1.4.RELEASE</version>
+		</dependency> 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.1.4.RELEASE</version>
+		</dependency> 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.1.4.RELEASE</version>
+		</dependency>
+		
+		<!-- OmniFaces (utilitarios para JSF) -->
+		<dependency>
+		    <groupId>org.omnifaces</groupId>
+		    <artifactId>omnifaces</artifactId>
+		    <version>1.5</version>
+		    <scope>compile</scope>
+		</dependency>
+        
+	</dependencies>
+		
+	
+	<!--  avisa ao Maven para usar o java 8 p/ compilar o projeto -->
+	  <build>
+    <sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+	  
+ <h:head> <!-- ajuda o jsf a add todos os scripts e css que o primeFaces precisa de forma automática -->
+	<meta charset="UTF-8"/>
+	<title>Pesquisa de Servidor</title>
+
+</h:head> 
+
+ <ui:define name="subheader">
+	Pesquisa de Servidor
+    </ui:define>
+    
+    <ui:define name="content">
+        
+	<br></br>
+    	<f:metadata>
+			<f:viewAction action="#{pesquisaServidorBean.inicializar}" />
+		</f:metadata>
+    
+    	
+    	<h:form id="frmPesquisa">
+    		<p:messages id="messages" autoUpdate="true" closable="true" />
+    		
+    		 <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect ui-fluid">
+                    <div class="Container100 Responsive100">
+                        <div class="ContainerIndent">
+                            <h1 class="BigTopic">Pesquisa de Servidor</h1>
+    		<p:toolbar style="margin-top: 20px">
+    			<p:toolbarGroup>
+    				<p:button value="Novo" outcome="/CadastroServidor.xhtml"/>
+    			</p:toolbarGroup>
+    		</p:toolbar>
+    	
+	    	<p:dataTable id="servidoresTable" value="#{pesquisaServidorBean.servidores}" var="servidor"
+		    		style="margin-top: 20px" emptyMessage="Nenhum servidor encontrado." rows="5"
+		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+		    		<p:column headerText="Código" style="text-align: center; width: 100px">
+		    			<h:outputText value="#{servidor.id}" />
+		    		</p:column>
+		    		<p:column headerText="Nome">
+		    			<h:outputText value="#{servidor.nome}" />
+		    		</p:column>
+		    		<p:column headerText="Memoria Ram">
+		    			<h:outputText value="#{servidor.memoriaRam}" />
+		    		</p:column>
+		    		<p:column headerText="IP">
+		    			<h:outputText value="#{servidor.ipServidor}" />
+		    		</p:column>
+		    		<p:column headerText="Tipo">
+		    			<h:outputText value="#{servidor.tipo}" />
+		    		</p:column>
+		    		<p:column headerText="Sistema Operacional">
+		    			<h:outputText value="#{servidor.sistemaOperacional.nome}" />
+		    		</p:column>
+		    		<p:column headerText="Observação">
+		    			<h:outputText value="#{servidor.observacao}" />
+		    		</p:column>
+		    		<p:column style="width: 100px; text-align: center">
+		    			<p:button outcome="CadastroServidor" icon="ui-icon-pencil" title="Editar" >
+		    				<f:param name="servidor" value="#{servidor.id}"/>
+		    			</p:button>
+		    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+								process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+							<f:setPropertyActionListener target="#{pesquisaServidorBean.servidorSelecionado}" value="#{servidor}" />
+						</p:commandButton>
+		    		</p:column>
+		    </p:dataTable>
+		    
+		    <p:confirmDialog id="confirmacaoExclusaoDialog" widgetVar="confirmacaoExclusao"
+	        		message="Tem certeza que deseja excluir o servidor #{pesquisaServidorBean.servidorSelecionado.nome}?"  
+	                header="Exclusão de servidor" severity="alert">
+	        	<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	        	<p:commandButton value="Sim" update=":frmPesquisa:servidoresTable"
+	        			oncomplete="PF('confirmacaoExclusao').hide()" action="#{pesquisaServidorBean.excluir}" />
+	    	</p:confirmDialog>
+	    	
+	    	
+	    	                      </div>
+			                    </div>
+			                </div>
+		            </div>
+		        </div>				
+	    </h:form>
+    </ui:define>
+</ui:composition>

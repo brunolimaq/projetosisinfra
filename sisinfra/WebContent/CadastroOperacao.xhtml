@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+	  
+ <h:head> <!-- ajuda o jsf a add todos os scripts e css que o primeFaces precisa de forma automática -->
+	<meta charset="UTF-8"/>
+	<title>Cadastro de Operação</title>
+
+</h:head> 
+
+ <ui:define name="subheader">
+	Cadastro de Operação
+    </ui:define>
+    
+    <ui:define name="content">
+        
+	<br></br>
+	
+		<f:metadata>
+			<o:viewParam name="operacao" value="#{operacoesBean.operacao}" />
+		</f:metadata>
+	
+		<h:form>	
+			<p:messages autoUpdate="true"/>
+			
+				
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect ui-fluid">
+                    <div class="Container30 Responsive30">
+                        <div class="ContainerIndent">
+                            <h1 class="BigTopic">Cadastro de Operação</h1>
+                 <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                            
+					
+					<p:outputLabel value="Nome: " for="nome"/>
+					<p:inputText id="nome" size="80" maxlength="120"
+					value="#{operacoesBean.operacao.nome}" />
+					
+<!-- 					<p:outputLabel value="Serviço" for="servico"/> -->
+<!-- 		    		<p:selectOneMenu id="servico" value="#{operacoesBean.operacao.servico}"> -->
+<!-- 		    			<f:selectItem itemLabel="Selecione o serviço" /> -->
+<!-- 		    			<f:selectItems value="#{operacoesBean.servicos}" var="servico"  -->
+<!-- 							itemLabel="#{servico.nome}" itemValue="#{servico}"/> -->
+<!-- 		    		</p:selectOneMenu> -->
+							
+					<p:commandButton value="Salvar" action="#{operacoesBean.salvar}"
+					/> 
+					
+				</p:panelGrid>
+				
+				
+	    	                      </div>
+			                    </div>
+			                </div>
+		            </div>
+		        </div>				
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+                <f:metadata>
+                	<o:viewParam name="servidor" value="#{servidoresBean.servidor}" />
+                </f:metadata>
+	<ui:define name="head">
+				<title>#{servidoresBean.editando ? 'Editando de Servidor' : 'Novo Servidor'}</title>
+	</ui:define>
+    
+    <ui:define name="content">
+        
+	<br></br>
+	<h:form>	
+	
+		
+        <div class="Container100">
+			<p:messages autoUpdate="true"/>
+        
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect ui-fluid">
+                    <div class="Container60 Responsive60">
+                        <div class="ContainerIndent">
+                        
+                            <h1 class="BigTopic">#{servidoresBean.editando ? 'Editando de Servidor' : 'Novo Servidor'}</h1>
+                            
+		
+                     		<p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+					
+										
+										<p:outputLabel value="Nome: " for="nome"/>
+										<p:inputText id="nome" size="80" maxlength="120"
+										value="#{servidoresBean.servidor.nome}" />
+										
+										<p:outputLabel value="Memória RAM " for="memoriaRam"/>
+										<p:inputText id="memoriaRam" size="11" maxlength="20"
+										value="#{servidoresBean.servidor.memoriaRam}" />
+										
+										<p:outputLabel value="Tipo Servidor" for="tipo"/> 
+							    		<p:selectOneMenu id="tipo" value="#{servidoresBean.servidor.tipo}">
+							    			<f:selectItem itemLabel="Selecione um tipo"/>
+							    			<f:selectItem itemValue="Virtual" itemLabel="Servidor Virtual"/>
+							    			<f:selectItem itemValue="Físico"  itemLabel="Servidor Físico"/>
+							    			<f:attribute name="collectionType" value="java.util.ArrayList"/>
+							    			
+						    			</p:selectOneMenu>
+						    			
+										<p:outputLabel value="IP Principal " for="ipServidor"/>
+										<p:inputText id="ipServidor" size="11" maxlength="30"
+										value="#{servidoresBean.servidor.ipServidor}" />
+										
+										<p:outputLabel value="Sistema Operacional " for="sistemaOperacional"/>
+										<p:selectOneMenu id="sistemaOperacional" value="#{servidoresBean.servidor.sistemaOperacional}">
+												<f:selectItems value="#{servidoresBean.sistemaOperacionais}" var="sistemaOperacional" 
+												itemLabel="#{sistemaOperacional.nome}" itemValue="#{sistemaOperacional}"/>
+												<f:attribute name="collectionType" value="java.util.ArrayList"/>
+												
+										</p:selectOneMenu>
+										<p:outputLabel value="Serviços" for="servico"/>
+							    		<p:selectManyCheckbox  id="servico" value="#{servidoresBean.servidor.servicos}"  converter="servicosConverter"  styleClass="many-checkbox" >
+							    			<f:selectItems value="#{servidoresBean.servicos}" var="servico" 
+												itemLabel="#{servico.nome}" itemValue="#{servico}"/>
+												<f:attribute name="collectionType" value="java.util.ArrayList"/>
+							    		</p:selectManyCheckbox >										
+																
+		
+										<p:commandButton value="Salvar" action="#{servidoresBean.salvar}"/> 
+										<h:inputHidden value="#{servidoresBean.servidor.id}"/>
+										
+				
+							</p:panelGrid>
+						   </div>
+	                    </div>
+			                    <div class="Container40 Responsive40">
+			                        <div class="ContainerIndent">
+			                            <h2 class="BigTopic">Observação</h2>
+			                            <p:inputTextarea rows="5" placeholder="Sua observação" value="#{servidoresBean.servidor.observacao}" />
+			                        </div>
+			                    </div>
+			                </div>
+		            </div>
+		        </div>				
+	</h:form>
+
+</ui:define>
+</ui:composition>

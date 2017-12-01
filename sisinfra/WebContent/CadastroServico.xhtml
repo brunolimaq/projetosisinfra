@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+				xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+	  
+ <h:head> <!-- ajuda o jsf a add todos os scripts e css que o primeFaces precisa de forma automática -->
+	<meta charset="UTF-8"/>
+	<title>Cadastro de Serviço</title>
+
+</h:head> 
+
+ <ui:define name="subheader">
+	Cadastro de Serviço
+    </ui:define>
+    
+    <ui:define name="content">
+        
+	<br></br>
+	
+		<f:metadata>
+			<o:viewParam name="servico" value="#{servicosBean.servico}" />
+		</f:metadata>
+	
+	
+	<h:form>	
+		<p:messages autoUpdate="true"/>
+					
+           <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect ui-fluid">
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <h1 class="BigTopic">Cadastro de Serviço</h1>
+		
+                     		<p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+				<p:outputLabel value="Nome: " for="nome"/>
+				<p:inputText id="nome" size="80" maxlength="120"
+				value="#{servicosBean.servico.nome}" />
+				
+				<p:outputLabel value="Operação" for="operacao"/>
+		    		<p:selectManyCheckbox  id="operacao" value="#{servicosBean.servico.operacoes}" converter="operacoesConverter" styleClass="many-checkbox" >
+		    			<f:selectItems value="#{servicosBean.operacoes}" var="operacao" 
+							itemLabel="#{operacao.nome}" itemValue="#{operacao}"/>
+					 <f:attribute name="collectionType" value="java.util.ArrayList"/>
+							
+		    		</p:selectManyCheckbox >
+			    <br></br>
+			    <br></br>
+			    <br></br>
+			    
+				<p:commandButton value="Salvar" action="#{servicosBean.salvar}"/> 
+				
+			</p:panelGrid>
+				                    </div>
+				                    </div>
+			                    <div class="Container50 Responsive50">
+			                        <div class="ContainerIndent">
+			                            <h2 class="BigTopic">Descrição</h2>
+			                            <p:inputTextarea rows="5" placeholder="Descrição do Serviço" value="#{servicosBean.servico.descricao}" />
+			                        </div>
+			                    </div>
+			                </div>
+		            </div>
+		        </div>				
+				
+	</h:form>
+        
+    </ui:define>
+
+</ui:composition>
+	

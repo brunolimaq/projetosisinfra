@@ -1,0 +1,39 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pm="http://primefaces.org/modena">
+
+    <div class="Animated05" id="layout-menu-cover">
+        <h:form id="menuform">
+            <pm:menu>
+                <p:menuitem id="rm_dashboard" value="Dashboard" icon="icon-dvr" outcome="/Dashboard.xhtml"/>
+                <p:submenu id="colors" label="Cadastro" icon="icon-library_add">
+                    <p:menuitem id="rm_operacao" value="Operação" icon="icon-cog" outcome="/CadastroOperacao" />
+                    <p:menuitem id="rm_cservico" value="Serviço" icon="icon-briefcase" outcome="/CadastroServico" />
+                    <p:menuitem id="rm_cservidor" value="Servidor" icon="icon-computer" outcome="/CadastroServidor" />
+					<p:menuitem id="rm_cusuario" value="Usuário" icon="icon-head" outcome="/CadastroUsuarios" />
+                    
+                </p:submenu>
+                <p:submenu id="rm_theme" label="Pesquisar" icon="icon-search">
+                    <p:menuitem id="rm_poperacao" value="Operação" icon="icon-cog" outcome="/PesquisaOperacao" />
+                    <p:menuitem id="rm_pservico" value="Serviço" icon="icon-briefcase" outcome="PesquisaServico" />
+                    <p:menuitem id="rm_pservidor" value="Servidor" icon="icon-computer" outcome="/PesquisaServidor" />
+                    <p:menuitem id="rm_pusuario" value="Usuário" icon="icon-head" outcome="/PesquisaUsuarios" />
+                    
+                </p:submenu>
+                <p:submenu id="rm_default" label="Relatórios" icon="icon-bar-graph-2">
+                    <p:menuitem id="rm_rservico" value="Por Serviço" icon="icon-briefcase" outcome="/RelatorioPorServico" />
+                    <p:menuitem id="rm_rservidor" value="Por Servidor" icon="icon-computer" outcome="/empty-page" />
+                    <p:menuitem id="rm_routros" value="Outros" icon="icon-pie-graph" outcome="/empty-page" />
+                </p:submenu>
+              
+                <p:separator />
+            </pm:menu>
+        </h:form>
+
+    </div>
+
+</ui:composition>

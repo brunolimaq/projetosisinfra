@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+ <component>
+        <component-type>org.primefaces.component.ModenaMenu</component-type>
+        <component-class>org.primefaces.modena.component.menu.ModenaMenu</component-class>
+    </component>
+    
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.ModenaMenuRenderer</renderer-type>
+            <renderer-class>org.primefaces.modena.component.menu.ModenaMenuRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+    
+	<application>
+	
+		<locale-config>
+			<default-locale>pt_BR</default-locale> <!-- serve tanto p/ msgs de validação quanto p/ datas, moedas etc -->
+		</locale-config>
+	</application>
+	<managed-bean>
+		<managed-bean-name>produtoBean</managed-bean-name>
+			<managed-bean-class>
+				br.com.sisinfra.controller.UsuariosBean
+			</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+</faces-config>
