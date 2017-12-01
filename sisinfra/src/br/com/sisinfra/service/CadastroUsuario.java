@@ -17,7 +17,7 @@ public class CadastroUsuario implements Serializable {
 	
 	@Transacional
 	public void salvar(Usuario usuario) {
-		usuarios.guardar(usuario);
+//		usuarios.guardar(usuario);
 	}
 	
 	

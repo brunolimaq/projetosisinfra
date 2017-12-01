@@ -6,24 +6,27 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
            
-	
-	  
+	  <beans:bean id="appUserDetailsService" class="br.com.sisinfra.seguranca.AppUserDetailsService" />
+    
+    <http pattern="/Login.xhtml" security="none" />
+    
     <http pattern="/javax.faces.resource/**" security="none" />
     
-	<http auto-config="true" >
-		<intercept-url pattern="/**" access="isAuthenticated()" />
-		<intercept-url pattern="/CadastroUsuarios.xhtml" access="ROLE_MONITORACAO" />
-	    <intercept-url pattern="/PesquisaUsuarios.xhtml" access="ROLE_ADMINISTRADORES" />
-		
-		<intercept-url pattern="/**" access="ROLE_ADMINISTRADORES" />
+	<http auto-config="false" use-expressions="true">
+		<intercept-url pattern="/Dashboard.xhtml" access="isAuthenticated()" />
+		<intercept-url pattern="/servidor/**" access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES')" />
+		<intercept-url pattern="/CadastroOperacao.xhtml" access="hasAnyRole('ADMINISTRADORES')" />
+<!-- 		<intercept-url pattern="/**" access="denyAll" /> -->
+
+		<form-login login-page="/Login.xhtml" authentication-failure-url="/Login.xhtml?invalid=true" 
+			default-target-url="/" always-use-default-target="true" />
+		<logout logout-url="/j_spring_security_logout" invalidate-session="true" />
+
 	</http>
 	
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="bruno" password="123123" authorities="ROLE_MONITORACAO" />
-				<user name="daianara" password="123456" authorities="ROLE_ADMINISTRADORES" />
-			</user-service>
+		<authentication-provider user-service-ref="appUserDetailsService">
+			<!-- <password-encoder hash="md5" /> -->
 		</authentication-provider>
 	</authentication-manager>
            

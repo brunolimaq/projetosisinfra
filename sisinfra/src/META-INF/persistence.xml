@@ -17,7 +17,7 @@
 <!-- 			<property name="javax.persistence.schema-generation.database.action" value="create" /> TODA vez que a aplicação iniciar ele dropa o banco e cria de novo -->
 <!--       		<property name="javax.persistence.schema-generation.create-source" value="metadata" /> é p/ usar as anotações para criar o banco ou apagar -->
       		<!-- validate | update | create | create-drop -->
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
       		<!-- Essas duas propriedades não estão  na especificação do JPA, são específicas do Hibernate -->
 			<property name="hibernate.show_sql" value="true" /> <!-- todo sql, toda operação com o banco p/ exibir no console. Se por 'false' não exibe -->
 			<property name="hibernate.format_sql" value="true" /> <!-- a anterior vai mostrar a consulta numa linha só. Essa linha formata em uma tabela. -->
