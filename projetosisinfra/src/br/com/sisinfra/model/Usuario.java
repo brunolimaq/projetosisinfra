@@ -37,11 +37,13 @@ public class Usuario implements Serializable {
 	@Column(nullable = false, length = 20)
 	private String senha;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name="usuario_id"),
-			inverseJoinColumns = @JoinColumn(name = "grupo_id"))
-	private List<Grupo> grupos = new ArrayList<>();
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name="usuario_id"),
+//			inverseJoinColumns = @JoinColumn(name = "grupo_id"))
+//	private List<Grupo> grupos = new ArrayList<>();
 
+	@ManyToMany
+	private List<Grupo> grupos;
 
 	@Override
 	public int hashCode() {
@@ -68,11 +70,7 @@ public class Usuario implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + getId() + "]";
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}

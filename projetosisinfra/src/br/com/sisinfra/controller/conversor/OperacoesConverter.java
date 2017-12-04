@@ -5,28 +5,31 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.com.sisinfra.dao.UsuariosDao;
-import br.com.sisinfra.model.Grupo;
+import br.com.sisinfra.dao.OperacaoDao;
+import br.com.sisinfra.dao.ServicosDao;
+import br.com.sisinfra.dao.OperacaoDao;
 import br.com.sisinfra.model.Operacao;
-import br.com.sisinfra.model.Usuario;
+import br.com.sisinfra.model.Servico;
 import br.com.sisinfra.util.CDIServiceLocator;
 
-@FacesConverter(forClass = Usuario.class)
-public class UsuarioConverter implements Converter {
-
-	//@Inject
-	private UsuariosDao usuarios;
 	
-	public UsuarioConverter() {
-		this.usuarios = (UsuariosDao) CDIServiceLocator.getBean(UsuariosDao.class);
+
+@FacesConverter("operacoesConverter")
+public class OperacoesConverter implements Converter {
+
+	
+	private OperacaoDao operacaoDAO;
+	
+	public OperacoesConverter() {
+		this.operacaoDAO = CDIServiceLocator.getBean(OperacaoDao.class);
 	}
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Usuario retorno = null;
-
+		Operacao retorno = null;
+		
 		if (value != null) {
-			retorno = this.usuarios.porId(new Long(value));
+			retorno = this.operacaoDAO.buscarPeloCodigo(new Long(value));
 		}
 
 		return retorno;
@@ -34,17 +37,17 @@ public class UsuarioConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		
 		if (value != null) {
-			Long codigo = ((Usuario) value).getId();
+			Long codigo = ((Operacao) value).getId();
 			String retorno = (codigo == null ? null : codigo.toString());
 			
 			return retorno;
 		}
 //		if (value != null) {
-//			return ((Usuario) value).getId().toString();
+//			Operacao operacao= (Operacao) value;
+//			return operacao.getId() == null ? null : operacao.getId().toString();
 //		}
+		
 		return "";
 	}
-
 }

@@ -63,7 +63,8 @@ public class ServidoresBean implements Serializable{
 	
 	public void salvar() throws NegocioException{
 		cadastroServidor.salvar(servidor);
-		
+		this.limpar();
+
 		if(this.servidor.getId() != null) {
 		messages.info("Servidor atualizado com sucesso!");
 		} else {

@@ -2,22 +2,16 @@ package br.com.sisinfra.dao.filter;
 
 public class ServicoFilter {
 	
-	private String nome;
-	private String descricao;
-	
-	
+	private String pesquisa;
 
-	public String getDescricao() {
-		return descricao;
+	public String getPesquisa() {
+		return pesquisa;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
 	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	
+	
 
 }

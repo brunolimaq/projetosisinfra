@@ -13,9 +13,6 @@
 
 </h:head> 
 
- <ui:define name="subheader">
-	Cadastro de Serviço
-    </ui:define>
     
     <ui:define name="content">
         
@@ -27,14 +24,16 @@
 	
 	
 	<h:form>	
-		<p:messages autoUpdate="true"/>
 					
            <div class="Container100">
+           		<p:messages autoUpdate="true"/>
+           
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect ui-fluid">
                     <div class="Container50 Responsive50">
                         <div class="ContainerIndent">
-                            <h1 class="BigTopic">Cadastro de Serviço</h1>
+                         <h1 >#{servicosBean.editando ? 'Editando de Serviço' : 'Cadastro de Serviço'}</h1>
+                        
 		
                      		<p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
 

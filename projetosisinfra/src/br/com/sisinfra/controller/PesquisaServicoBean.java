@@ -54,7 +54,7 @@ public class PesquisaServicoBean implements Serializable {
 
 	
 	public PesquisaServicoBean() {
-		filtro = new ServicoFilter();
+		setFiltro(new ServicoFilter());
 	}
 	public void excluir() {
 		try {
@@ -69,8 +69,7 @@ public class PesquisaServicoBean implements Serializable {
 
 	public void pesquisar() {
 		
-		System.out.println(filtro.getNome() + "||" + filtro.getDescricao());
-		setServicosFiltrados(servicoDAO.filtrados(filtro));
+		setServicosFiltrados(servicoDAO.filtrados(getFiltro()));
 	}
 	
 	public void inicializar() {
@@ -112,13 +111,6 @@ public class PesquisaServicoBean implements Serializable {
 		this.servicosFiltrados = servicosFiltrados;
 	}
 
-	public ServicoFilter getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(ServicoFilter filtro) {
-		this.filtro = filtro;
-	}
 	public List<Operacao> getOperacoesAtivas() {
 		operacoesAtivas = operacaoDAO.buscarOperacoes();
 		return operacoesAtivas; 
@@ -137,6 +129,12 @@ public class PesquisaServicoBean implements Serializable {
 	}
 	public void setServico(Servico servico) {
 		this.servico = servico;
+	}
+	public ServicoFilter getFiltro() {
+		return filtro;
+	}
+	public void setFiltro(ServicoFilter filtro) {
+		this.filtro = filtro;
 	}
 
 	

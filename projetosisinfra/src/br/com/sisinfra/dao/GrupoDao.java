@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.sisinfra.model.Grupo;
+import br.com.sisinfra.model.Operacao;
 
 public class GrupoDao {
 
@@ -17,6 +18,9 @@ public class GrupoDao {
 	}
 	
 	public List<Grupo> raizes() {
+		return manager.createQuery("from Grupo", Grupo.class).getResultList();
+	}
+	public List<Grupo> buscarTodos() {
 		return manager.createQuery("from Grupo", Grupo.class).getResultList();
 	}
 }

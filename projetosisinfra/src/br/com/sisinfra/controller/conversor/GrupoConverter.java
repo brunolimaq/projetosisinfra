@@ -7,10 +7,11 @@ import javax.faces.convert.FacesConverter;
 
 import br.com.sisinfra.dao.GrupoDao;
 import br.com.sisinfra.model.Grupo;
+import br.com.sisinfra.model.SistemaOperacional;
 import br.com.sisinfra.util.CDIServiceLocator;
 
 
-@FacesConverter(forClass = Grupo.class)
+@FacesConverter("gruposConverter")
 public class GrupoConverter implements Converter {
 
 	//@Inject
@@ -35,9 +36,16 @@ public class GrupoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			return ((Grupo) value).getId().toString();
+			Long codigo = ((Grupo) value).getId();
+			String retorno = (codigo == null ? null : codigo.toString());
+			
+			return retorno;
 		}
-		
+//		
+//		if (value != null) {
+//			return ((Grupo) value).getId().toString();
+//		}
+//		
 		return "";
 	}
 

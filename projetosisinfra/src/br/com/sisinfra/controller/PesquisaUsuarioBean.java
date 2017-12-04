@@ -31,20 +31,20 @@ public class PesquisaUsuarioBean implements Serializable {
 	
 	
 	
-//	public void excluir() {
-//		try {
-//			usuarioDAO.excluir(getUsuarioSelecionado());
-//			this.getUsuarios().remove(getUsuarioSelecionado());
-//			facesMessages.info("Usuario " + getUsuarioSelecionado().getNome() + " excluído com sucesso.");
-//		} catch (NegocioException e) {
-//			facesMessages.error(e.getMessage());
-//		}
-//	}
+	public void excluir() {
+		try {
+			usuarioDAO.excluir(getUsuarioSelecionado());
+			this.getUsuarios().remove(getUsuarioSelecionado());
+			facesMessages.info("Usuario " + getUsuarioSelecionado().getNome() + " excluído com sucesso.");
+		} catch (NegocioException e) {
+			facesMessages.error(e.getMessage());
+		}
+	}
 
 
-//	public void inicializar() {
-//		setUsuarios(usuarioDAO.buscarTodos());
-//	}
+	public void inicializar() {
+		setUsuarios(usuarioDAO.buscarTodos());
+	}
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;

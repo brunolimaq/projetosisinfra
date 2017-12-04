@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
+import br.com.sisinfra.model.Servico;
+import br.com.sisinfra.model.Servidor;
 import br.com.sisinfra.model.Usuario;
 import br.com.sisinfra.service.NegocioException;
 import br.com.sisinfra.util.Transacional;
@@ -29,6 +31,20 @@ private static final long serialVersionUID = 1L;
 				.getResultList();
 	}
 
+	@Transacional
+	public void excluir(Usuario usuario) throws NegocioException {
+		try {
+			Usuario servidorTemp = this.buscarPeloCodigo(usuario.getId());
+		
+			manager.remove(servidorTemp);
+			manager.flush();
+		} catch (PersistenceException e) {
+			throw new NegocioException("Usuario não pode ser excluído.");
+		}
+		
+	}
+	
+	
 	public Usuario porEmail(String email) {
 		Usuario usuario = null;
 		
@@ -40,6 +56,19 @@ private static final long serialVersionUID = 1L;
 		}
 		
 		return usuario;
+	}
+	
+	public Usuario guardar(Usuario usuario) {
+		return manager.merge(usuario); 
+	}
+
+	
+	public Usuario buscarPeloCodigo(Long codigo) {
+		return manager.find(Usuario.class, codigo);
+	}
+	
+	public List<Usuario> buscarTodos() {
+		return manager.createQuery("from Usuario", Usuario.class).getResultList();
 	}
 	
 

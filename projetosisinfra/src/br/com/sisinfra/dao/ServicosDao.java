@@ -10,6 +10,8 @@ import javax.persistence.PersistenceException;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -75,15 +77,19 @@ public class ServicosDao implements Serializable {
 		
 		Criteria criteria = session.createCriteria(Servico.class)	;
 		
-		System.out.println(filtro.getNome());
 
-		if (StringUtils.isNotBlank(filtro.getNome())) {
-			criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
+		if (StringUtils.isNotBlank(filtro.getPesquisa())) {
+			
+			Criterion nome = Restrictions.ilike("nome", filtro.getPesquisa(), MatchMode.ANYWHERE);
+			Criterion descricao = Restrictions.ilike("descricao", filtro.getPesquisa(), MatchMode.ANYWHERE);
+
+
+			LogicalExpression orExp = Restrictions.or(nome, descricao);
+			criteria.add( orExp );
+
+
 		}
 		
-		if (StringUtils.isNotBlank(filtro.getDescricao())) {
-			criteria.add(Restrictions.eq("descricao", filtro.getDescricao()));
-		}
 		System.out.println(criteria.list());
 		return criteria.list();
 	}

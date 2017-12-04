@@ -14,7 +14,6 @@ public class Grupo implements Serializable {
 
 	private Long id;
 	private String nome;
-	private String descricao;
 
 	@Id
 	@GeneratedValue
@@ -35,15 +34,15 @@ public class Grupo implements Serializable {
 		this.nome = nome;
 	}
 
-	@Column(nullable = false, length = 80)
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
+//	@Column(nullable = false, length = 80)
+//	public String getDescricao() {
+//		return descricao;
+//	}
+//
+//	public void setDescricao(String descricao) {
+//		this.descricao = descricao;
+//	}
+//
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -14,7 +14,7 @@ import br.com.sisinfra.util.CDIServiceLocator;
 
 	
 
-@FacesConverter("operacoesConverter")
+@FacesConverter(forClass = Operacao.class)
 public class OperacaoConverter implements Converter {
 
 	

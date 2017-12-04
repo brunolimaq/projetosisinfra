@@ -22,12 +22,12 @@
     		<h:form id="frm" prependId="false">
         <div class="Wid90 DispBlock MarAuto MarTopPerc5 TexAlCenter">
             <div class="Wid33 MarAuto WidAutoOnMobile">
-                <h:graphicImage name="images/logo-dark.svg" library="modena-layout" style="width:40%; max-width:200px;"/>
+            <p:messages autoUpdate="true"/>
                 <div class="EmptyBox30"></div>
                
                 <div class="Card ShadowEffect">
                     <div class="EmptyBox20"></div>
-                    <div class="Wid100 OvHidden BigTopic Fs30"><i class="icon-security Fs60 DispBlock"></i> Login / Sign Up</div>
+                    <div class="Wid100 OvHidden BigTopic Fs30"><i class="icon-security Fs60 DispBlock"></i> Login</div>
                     <div class="EmptyBox30"></div>
                     <div class="Wid100">
                     <p:inputText id="j_username" value="#{loginBean.email}" placeholder="Email" styleClass="Wid80 TexAlCenter Fs18"/>
@@ -46,7 +46,7 @@
                     <div class="Separator"></div>
                     <div class="Wid100">
                         <div class="EmptyBox10"></div>
-                       <p:commandButton value="Login" action="#{loginBean.login}" ajax="false" />
+                       <p:commandButton value="Entrar" action="#{loginBean.login}" ajax="false" />
                         
 <!--                         <p:button value="Send Access Request" styleClass="PurpleButton Fs18 White RaisedButton"/> -->
                     </div>

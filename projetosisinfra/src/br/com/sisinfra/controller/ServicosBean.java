@@ -56,8 +56,12 @@ public class ServicosBean implements Serializable{
 	
 	public void salvar(){
 		cadastroServico.salvar(servico);
-	
+		this.limpar();
 		messages.info("Serviço cadastrado com sucesso!");
+	}
+
+	public boolean isEditando() {
+		return this.servico.getId() != null;
 	}
 
 

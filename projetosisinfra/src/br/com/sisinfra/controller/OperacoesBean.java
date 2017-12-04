@@ -45,13 +45,17 @@ public class OperacoesBean implements Serializable{
 	}
 	public void salvar() throws NegocioException {
 		cadastroOperacao.salvar(operacao);
-	
+		this.limpar();
 		messages.info("Operação cadastrado com sucesso!");
 	}
 
 
 	public Operacao getOperacao() {
 		return operacao;
+	}
+
+	public boolean isEditando() {
+		return this.operacao.getId() != null;
 	}
 
 

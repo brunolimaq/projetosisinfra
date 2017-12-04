@@ -8,7 +8,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.sisinfra.dao.OperacaoDao;
+import br.com.sisinfra.dao.filter.ServicoFilter;
 import br.com.sisinfra.model.Operacao;
+import br.com.sisinfra.model.Servico;
 import br.com.sisinfra.service.NegocioException;
 import br.com.sisinfra.util.FacesMessages;
 
@@ -23,13 +25,17 @@ public class PesquisaOperacaoBean implements Serializable {
 	
 	private List<Operacao> operacoes;
 	
+	private Operacao operacao;
 	
 	private Operacao operacaoSelecionado;
 	
 	@Inject
 	private FacesMessages facesMessages;
 	
+	private ServicoFilter filtro;
 	
+	private List<Operacao> operacoesFiltrados;
+
 	
 	public void excluir() {
 		try {
@@ -46,6 +52,14 @@ public class PesquisaOperacaoBean implements Serializable {
 		setOperacoes(operacaoDAO.buscarTodos());
 	}
 
+	public PesquisaOperacaoBean() {
+		setFiltro(new ServicoFilter());
+	}
+
+	public void pesquisar() {
+		
+		setOperacoesFiltrados(operacaoDAO.filtrados(filtro));
+	}
 
 
 
@@ -67,6 +81,40 @@ public class PesquisaOperacaoBean implements Serializable {
 	public void setOperacaoSelecionado(Operacao operacaoSelecionado) {
 		this.operacaoSelecionado = operacaoSelecionado;
 	}
+
+
+
+
+	public ServicoFilter getFiltro() {
+		return filtro;
+	}
+
+
+	public void setFiltro(ServicoFilter filtro) {
+		this.filtro = filtro;
+	}
+
+
+	public List<Operacao> getOperacoesFiltrados() {
+		return operacoesFiltrados;
+	}
+
+
+	public void setOperacoesFiltrados(List<Operacao> operacoesFiltrados) {
+		this.operacoesFiltrados = operacoesFiltrados;
+	}
+
+
+	public Operacao getOperacao() {
+		return operacao;
+	}
+
+
+	public void setOperacao(Operacao operacao) {
+		this.operacao = operacao;
+	}
+
+
 
 	
 

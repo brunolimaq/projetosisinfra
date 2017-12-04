@@ -21,6 +21,8 @@
 	<br></br>
     	<f:metadata>
 			<f:viewAction action="#{pesquisaServidorBean.inicializar}" />
+			<f:viewAction action="#{pesquisaServidorBean.pesquisar}" />
+			
 		</f:metadata>
     
     	
@@ -32,14 +34,36 @@
                 <div class="Card ShadowEffect ui-fluid">
                     <div class="Container100 Responsive100">
                         <div class="ContainerIndent">
-                            <h1 class="BigTopic">Pesquisa de Servidor</h1>
-    		<p:toolbar style="margin-top: 20px">
-    			<p:toolbarGroup>
-    				<p:button value="Novo" outcome="/CadastroServidor.xhtml"/>
-    			</p:toolbarGroup>
+                            <h1 >Pesquisa de Servidor</h1>
+
+                        
+			<p:toolbar  style="margin-top: 20px; border: none;">
+	   			<p:toolbarGroup align="right">
+	   				<p:button value="Novo" outcome="/CadastroServidor.xhtml"/>
+	   			</p:toolbarGroup>
     		</p:toolbar>
+             
+             		               
+
+    		
+    		<h3>Campos para pesquisar</h3>
+    		
+   			<p:panelGrid columns="2" id="painel" style="width: 40%; margin-top: 20px"
+    			columnClasses="rotulo, campo">
+    			
+    			
+	    		<p:outputLabel value="Pesquisar: " for="pesquisa"/>
+	    		<p:inputText id="pesquisa" size="20" value="#{pesquisaServidorBean.filtro.pesquisa}" />
+	    				               
+    		</p:panelGrid>
+    		
+    		<p:toolbar  style="margin-top: 20px; border: none;">
+	    			<p:toolbarGroup >
+		    			<p:commandButton value="Pesquisar" action="#{pesquisaServidorBean.pesquisar}" update="@form" />
+		    		</p:toolbarGroup>
+	    	</p:toolbar>
     	
-	    	<p:dataTable id="servidoresTable" value="#{pesquisaServidorBean.servidores}" var="servidor"
+	    	<p:dataTable id="servidoresTable" value="#{pesquisaServidorBean.servidorFiltrados}" var="servidor"
 		    		style="margin-top: 20px" emptyMessage="Nenhum servidor encontrado." rows="5"
 		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 		    		<p:column headerText="Código" style="text-align: center; width: 100px">

@@ -7,6 +7,17 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
+import br.com.sisinfra.dao.filter.ServicoFilter;
+import br.com.sisinfra.model.Servico;
 import br.com.sisinfra.model.Servidor;
 import br.com.sisinfra.service.NegocioException;
 import br.com.sisinfra.util.Transacional;
@@ -56,6 +67,34 @@ public class ServidorDao implements Serializable {
 	
 	public List<Servidor> buscarTodos() {
 		return manager.createQuery("from Servidor", Servidor.class).getResultList();
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	public List<Servidor> filtrados(ServicoFilter filtro) {
+		Session session = manager.unwrap(Session.class);
+//		Session session = (Session) manager.getDelegate();
+		
+		Criteria criteria = session.createCriteria(Servidor.class)	;
+		
+
+		if (StringUtils.isNotBlank(filtro.getPesquisa())) {
+			
+			Criterion nome = Restrictions.ilike("nome", filtro.getPesquisa(), MatchMode.ANYWHERE);
+			Criterion ipServidor = Restrictions.ilike("ipServidor", filtro.getPesquisa(), MatchMode.ANYWHERE);
+			Criterion memoriaRam = Restrictions.ilike("memoriaRam", filtro.getPesquisa(), MatchMode.ANYWHERE);
+			Criterion observacao = Restrictions.ilike("observacao", filtro.getPesquisa(), MatchMode.ANYWHERE);
+			Criterion tipo = Restrictions.ilike("tipo", filtro.getPesquisa(), MatchMode.ANYWHERE);
+
+
+			Disjunction orExp = Restrictions.or(nome, ipServidor,memoriaRam ,observacao,tipo);
+			criteria.add( orExp );
+
+
+		}
+		
+		System.out.println(criteria.list());
+		return criteria.list();
 	}
 
 	

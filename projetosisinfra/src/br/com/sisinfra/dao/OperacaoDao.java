@@ -7,7 +7,17 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
+import br.com.sisinfra.dao.filter.ServicoFilter;
 import br.com.sisinfra.model.Operacao;
+import br.com.sisinfra.model.Servico;
 import br.com.sisinfra.service.NegocioException;
 import br.com.sisinfra.util.Transacional;
 
@@ -63,5 +73,24 @@ public class OperacaoDao implements Serializable {
 		return manager.createQuery("from servico_operacao", Operacao.class).getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Operacao> filtrados(ServicoFilter filtro) {
+		Session session = manager.unwrap(Session.class);
+//		Session session = (Session) manager.getDelegate();
+		
+		Criteria criteria = session.createCriteria(Operacao.class)	;
+	
+
+			if (StringUtils.isNotBlank(filtro.getPesquisa())) {
+				System.out.println("pesquisa operacao: " + filtro.getPesquisa());
+				criteria.add(Restrictions.ilike("nome", filtro.getPesquisa(), MatchMode.ANYWHERE));
+			}
+
+	
+		
+		System.out.println("resultado operacao: " + criteria.list());
+		return criteria.list();
+	}
+
 
 }

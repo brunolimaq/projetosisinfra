@@ -13,9 +13,6 @@
 
 </h:head> 
 
- <ui:define name="subheader">
-	Cadastro de Operação
-    </ui:define>
     
     <ui:define name="content">
         
@@ -26,16 +23,18 @@
 		</f:metadata>
 	
 		<h:form>	
-			<p:messages autoUpdate="true"/>
 			
 				
         <div class="Container100">
+        			<p:messages autoUpdate="true"/>
+        
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect ui-fluid">
                     <div class="Container30 Responsive30">
                         <div class="ContainerIndent">
-                            <h1 class="BigTopic">Cadastro de Operação</h1>
-                 <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                         <h1 >#{operacaoBean.editando ? 'Editando Operação' : 'Cadastro de Operação'}</h1>
+               
+               	  <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
                             
 					
 					<p:outputLabel value="Nome: " for="nome"/>

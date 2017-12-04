@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import br.com.sisinfra.dao.ServidorDao;
 import br.com.sisinfra.dao.filter.ServicoFilter;
+import br.com.sisinfra.model.Servico;
 import br.com.sisinfra.model.Servidor;
 import br.com.sisinfra.service.NegocioException;
 import br.com.sisinfra.util.FacesMessages;
@@ -24,6 +25,9 @@ public class PesquisaServidorBean implements Serializable {
 	
 	private List<Servidor> servidores;
 	
+	private ServicoFilter filtro;
+	
+	private List<Servidor> servidorFiltrados;
 
 	
 	private Servidor servidorSelecionado;
@@ -32,7 +36,10 @@ public class PesquisaServidorBean implements Serializable {
 	private FacesMessages facesMessages;
 	
 	
-	
+
+	public PesquisaServidorBean() {
+		setFiltro(new ServicoFilter());
+	}
 	public void excluir() {
 		try {
 			servidorDAO.excluir(getServidorSelecionado());
@@ -41,6 +48,11 @@ public class PesquisaServidorBean implements Serializable {
 		} catch (NegocioException e) {
 			facesMessages.error(e.getMessage());
 		}
+	}
+
+	public void pesquisar() {
+		
+		setServidorFiltrados(servidorDAO.filtrados(getFiltro()));
 	}
 
 	
@@ -62,6 +74,25 @@ public class PesquisaServidorBean implements Serializable {
 
 	public void setServidorSelecionado(Servidor servidorSelecionado) {
 		this.servidorSelecionado = servidorSelecionado;
+	}
+
+
+	public ServicoFilter getFiltro() {
+		return filtro;
+	}
+
+
+	public void setFiltro(ServicoFilter filtro) {
+		this.filtro = filtro;
+	}
+
+
+
+	public List<Servidor> getServidorFiltrados() {
+		return servidorFiltrados;
+	}
+	public void setServidorFiltrados(List<Servidor> servidorFiltrados) {
+		this.servidorFiltrados = servidorFiltrados;
 	}
 
 

@@ -12,23 +12,23 @@
 
 </h:head> 
 
- <ui:define name="subheader">
-	Cadastro de Usuários
-    </ui:define>
-    
+
     <ui:define name="content">
         
 	<br></br>
 	
 	<h:form>
-		<p:messages autoUpdate="true"/>
 				
         <div class="Container100">
+        		<p:messages autoUpdate="true"/>
+        
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect ui-fluid">
                     <div class="Container30 Responsive30">
                         <div class="ContainerIndent">
-                            <h1 class="BigTopic">Cadastro de Usuário</h1>
+                         <h1 >#{usuariosBean.editando ? 'Editando Usuário' : 'Cadastro de Usuário'}</h1>
+                         
+                         
                  <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
                             
 				<p:outputLabel value="Nome: " for="nome"/>
@@ -39,20 +39,22 @@
 				<p:inputText id="sobrenome" size="80" maxlength="120"
 				value="#{usuariosBean.usuario.sobrenome}" />
 				
-				<p:outputLabel value="E-mail " for="email"/>
+				<p:outputLabel value="E-mail: " for="email"/>
 				<p:inputText id="email" size="80" maxlength="120"
 				value="#{usuariosBean.usuario.email}" />
 				
-				<p:outputLabel value="Senha " for="senha"/>
+				<p:outputLabel value="Senha: " for="senha"/>
 				<p:inputText id="senha" size="80" maxlength="120"
 				value="#{usuariosBean.usuario.senha}" />
 				
-<!-- 				<p:outputLabel value="Grupos" for="grupo"/> -->
-<!-- 	    		<p:selectOneMenu id="grupo" value="#{usuariosBean.grupo}"> -->
-<!-- 	    			<f:selectItem itemLabel="Selecione a categoria"/> -->
-<!-- 					<f:selectItems value="1" var="categoria" -->
-<!-- 	    				itemValue="1" itemLabel="Administrador" />	    		 -->
-<!-- 	    			</p:selectOneMenu> -->
+			<p:outputLabel value="Grupos " for="grupo"/>
+			<p:selectManyCheckbox id="grupo" value="#{usuariosBean.usuario.grupos}"  converter="gruposConverter"  styleClass="many-checkbox" >
+					<f:selectItems value="#{usuariosBean.grupos}" var="grupo" 
+					itemLabel="#{grupo.nome}" itemValue="#{grupo}"/>
+					<f:attribute name="collectionType" value="java.util.ArrayList"/>
+					
+			</p:selectManyCheckbox>
+			
 				
 				<p:commandButton value="Salvar" action="#{usuariosBean.salvar}"/> 
 				
